@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 
+import { requestLogger } from './middleware/logger.middleware';
 import config from './config/config';
 import AppDataSource from './database/data-source';
 
@@ -30,7 +31,10 @@ app.use(limiter);
 
 app.get('/', (req: Request, res: Response): void => {
   res.json('Thank you for visiting YAMAHA APP 👋🏻 !');
-});
+})
+
+// Log requests
+app.use(requestLogger);
 
 // Start the database and server
 AppDataSource.initialize()
