@@ -2,7 +2,8 @@ import express, { Request, Response, Application } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
-
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpecs } from './config/swagger.config';
 import { requestLogger } from './middleware/logger.middleware';
 import config from './config/config';
 import AppDataSource from './database/data-source';
@@ -19,6 +20,9 @@ app.use(helmet());
 // Enable CORS
 app.use(cors());
 
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
 // Rate Limiter to prevent abuse
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -31,7 +35,11 @@ app.use(limiter);
 
 app.get('/', (req: Request, res: Response): void => {
   res.json('Thank you for visiting YAMAHA APP 👋🏻 !');
-})
+});
+
+app.get('/api', (req: Request, res: Response): void => {
+  res.json('Thank you for visiting YAMAHA APP 👋🏻 !');
+});
 
 // Log requests
 app.use(requestLogger);

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:local": "tsx watch src/index.ts",
+    "start:local": "tsx --watch src/index.ts",
     "dev": "nodemon",
     "lint": "eslint src/**",
     "lint:fix": "eslint src/** --fix --max-warnings=0",
@@ -20,6 +20,8 @@
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.9.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
@@ -41,6 +43,8 @@
     "helmet": "^8.0.0",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.20",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
