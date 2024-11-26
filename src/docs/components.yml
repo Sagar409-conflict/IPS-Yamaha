@@ -44,8 +44,10 @@ components:
       properties:
         code:
           type: number
+          default: 500
         message:
           type: string
+          default: 'Internal Server Error Dynamic'
 
   responses:
     DuplicateEmail:

@@ -20,7 +20,7 @@ const route = Router();
  *                 message:
  *                   type: string
  *                   example: "Example response"
- *       "500":
+ *       500:
  *         description: Internal Server response
  *         content:
  *           application/json:
