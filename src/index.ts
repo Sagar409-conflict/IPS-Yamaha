@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express, { Request, Response, Application } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -7,6 +8,7 @@ import { swaggerSpecs } from './config/swagger.config';
 import { requestLogger } from './middleware/logger.middleware';
 import config from './config/config';
 import AppDataSource from './database/data-source';
+import errorHandler from './middleware/globalErrorHandler.middleware';
 
 const app: Application = express();
 
@@ -33,16 +35,15 @@ app.use(limiter);
 
 // Basic route
 
-app.get('/', (req: Request, res: Response): void => {
-  res.json('Thank you for visiting YAMAHA APP 👋🏻 !');
-});
-
 app.get('/api', (req: Request, res: Response): void => {
   res.json('Thank you for visiting YAMAHA APP 👋🏻 !');
 });
 
 // Log requests
 app.use(requestLogger);
+
+// Global error handler
+app.use(errorHandler);
 
 // Start the database and server
 AppDataSource.initialize()
