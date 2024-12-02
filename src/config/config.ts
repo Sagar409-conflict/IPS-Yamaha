@@ -1,22 +1,16 @@
-import dotenv from 'dotenv';
-import path from 'path';
+import dotenv from 'dotenv'
 
-// Load environment variables from .env file
-dotenv.config({ path: path.join(__dirname, '../../.env') });
+dotenv.config()
 
-// Export configuration object
-const config = {
-  app: {
-    port: process.env.APP_PORT || 3000,
-    env: process.env.NODE_ENV || 'development',
+export const CONFIG = {
+  DB: {
+    NAME: process.env.DB_NAME as string,
+    USERNAME: process.env.DB_USERNAME as string,
+    PASSWORD: process.env.DB_PASSWORD as string,
+    HOST: process.env.DB_HOST as string,
   },
-  db: {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432', 10),
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS, 
-    database: process.env.DB_NAME,
-  },
-};
-
-export default config;
+  PORT: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+  JWT_SECRET: process.env.JWT_SECRET as string,
+  ADMIN_EMAIL: process.env.ADMINEMAIL,
+  ADMIN_PASS: process.env.ADMINPASS,
+}

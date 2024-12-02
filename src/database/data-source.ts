@@ -1,18 +1,13 @@
-import { DataSource } from 'typeorm';
-import config from '../config/config';
 
 
-const AppDataSource = new DataSource({
-  type: 'postgres',
-  host: config.db.host,
-  port: config.db.port,
-  username: config.db.username,
-  password: config.db.password,
-  database: config.db.database,
-  synchronize: config.app.env === 'development', // Enable only in development
-  logging: config.app.env === 'development',
-  entities: ['app/**/*.entity.js'],
-  migrations: ['db/migrations/*.js'],
-});
+import { Sequelize } from 'sequelize'
+import { CONFIG } from '../config/config'
 
-export default AppDataSource;
+const sequelize = new Sequelize(CONFIG.DB.NAME, CONFIG.DB.USERNAME, CONFIG.DB.PASSWORD, {
+  host: CONFIG.DB.HOST,
+  dialect: 'mysql',
+  logging: false,
+})
+
+export default sequelize
+

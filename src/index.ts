@@ -1,12 +1,13 @@
 import express, { Request, Response, Application } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+import route from './routes/index';
 import rateLimit from 'express-rate-limit';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpecs } from './config/swagger.config';
 import { requestLogger } from './middleware/logger.middleware';
-import config from './config/config';
-import AppDataSource from './database/data-source';
+import {CONFIG} from './config/config'
+import sequelize from './database/data-source';
 
 const app: Application = express();
 
@@ -44,13 +45,16 @@ app.get('/api', (req: Request, res: Response): void => {
 // Log requests
 app.use(requestLogger);
 
+app.use('/api', route); // Mount all routes from the central route file
+
+
 // Start the database and server
-AppDataSource.initialize()
+sequelize.authenticate()
   .then(() => {
     console.log('🟢 Database connection established');
 
-    app.listen(config.app.port, () => {
-      console.log(`🚀 Server running on http://localhost:${config.app.port}`);
+    app.listen(CONFIG.PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${CONFIG.PORT}`);
     });
   })
   .catch((error) => {
