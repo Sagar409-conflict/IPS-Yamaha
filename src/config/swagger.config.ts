@@ -2,6 +2,7 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import path from 'path';
 import fs from 'fs';
 import YAML from 'yaml';
+import { CONFIG } from './config';
 
 // Load components from YAML
 console.log(__dirname);
@@ -19,7 +20,7 @@ const options: swaggerJsdoc.Options = {
     components: components.components,
     servers: [
       {
-        url: 'http://localhost:3000', // Replace with your server URL
+        url: `${CONFIG.URL}${CONFIG.PORT}`,
         description: 'Local server',
       },
     ],

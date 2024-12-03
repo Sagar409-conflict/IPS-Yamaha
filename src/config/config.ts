@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 export const CONFIG = {
   DB: {
@@ -10,7 +10,8 @@ export const CONFIG = {
     HOST: process.env.DB_HOST as string,
   },
   PORT: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+  URL: process.env.URL as string,
   JWT_SECRET: process.env.JWT_SECRET as string,
   ADMIN_EMAIL: process.env.ADMINEMAIL,
   ADMIN_PASS: process.env.ADMINPASS,
-}
+};
