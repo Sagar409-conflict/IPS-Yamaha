@@ -1,4 +1,4 @@
-export const statusCode = {
+export const statusCode: IStatusCode = {
   SUCCESS: 200,
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
@@ -9,4 +9,20 @@ export const statusCode = {
   UNPROCESSABLE_ENTITY: 422,
   FORBIDDEN: 403,
   TOO_MANY_REQUESTS: 429,
+}
+
+
+// Types
+
+export interface IStatusCode {
+  SUCCESS: number
+  BAD_REQUEST: number
+  UNAUTHORIZED: number
+  NOTFOUND: number
+  CREATED: number
+  SERVER_ERROR: number
+  INTERNAL_SERVER_ERROR: number
+  UNPROCESSABLE_ENTITY: number
+  FORBIDDEN: number
+  TOO_MANY_REQUESTS: number
 }

@@ -1,33 +1,17 @@
 import { Router } from 'express'
 import authController from '../controller/index'
 import  {validate}  from '../../../middleware/validator.middleware'
-import { AuthGuard } from '../../../middleware/auth.middleware'
-
+import { registerValidation } from '../validations'
 const authRoutes = Router()
 
 /**
  * User Routes
  */
-authRoutes.post('/', validate('register'), authController.register)
+authRoutes.post('/',authController.register)
+// authRoutes.post('/', validate(registerValidation),authController.register)
 
-authRoutes.post('/login',()=>{
-  console.log("login")
-})
-authRoutes.post('/forgot-password', authController.forgotPassword)
-authRoutes.post('/verify-reset-password', authController.verifyOTP)
-authRoutes.post('/resend-otp', authController.resendOTP)
-authRoutes.post('/reset-password', validate('resetPassword'), authController.resetPassword)
-authRoutes.put(
-  '/change-password',
-  AuthGuard,
-  validate('changePassword'),
-  authController.changePassword
-)
-authRoutes.put(
-  '/update-profile',
-  AuthGuard,
-  validate('updateProfile'),
-  authController.updateProfile
-)
+// authRoutes.post('/login',()=>{
+//   console.log("login")
+// })
 
 export default authRoutes

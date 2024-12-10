@@ -3,6 +3,7 @@ import route from './routes/index';
 import { CONFIG } from './config/config';
 import { applyMiddlewares } from './middleware/server.middleware';
 import { initializeDatabase } from './database/connection';
+import { globalErrorHandler } from './middleware/globalErrorhandler.middleware';
 
 const app: Application = express();
 
@@ -19,6 +20,7 @@ app.get('/api', (req: Request, res: Response): void => {
 });
 
 app.use('/api', route);
+app.use(globalErrorHandler)
 
 const startServer = async (): Promise<void> => {
   try {

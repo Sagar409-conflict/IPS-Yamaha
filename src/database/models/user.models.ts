@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 import { v4 as uuidv4 } from 'uuid'
-import sequelize from '../../database/data-source'
+import sequelize from '../data-source'
 import { ROLES, ROLES_ARRAY, USER_STATUS } from '../../shared/constant/constant'
 import { ICreateUser, IUser } from '../types/user.types'
 
