@@ -19,18 +19,3 @@ export const executeTransaction = async <T>(
     throw error;
   }
 };
-
-const apiHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next)
-}
-const apiHandlerWithTransaction = async (serviceFn) => {
-  const transaction = await dbConnection.transaction()
-  try {
-    const result = await serviceFn(transaction)
-    await transaction.commit()
-    return result
-  } catch (error) {
-    await transaction.rollback()
-    throw error
-  }
-}

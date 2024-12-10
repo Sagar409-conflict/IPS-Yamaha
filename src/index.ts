@@ -27,12 +27,21 @@ const startServer = async (): Promise<void> => {
     await initializeDatabase();
 
     app.listen(CONFIG.PORT, () => {
-      console.log(`🚀 Server running on ${CONFIG.URL}${CONFIG.PORT}`);
+      console.log(`🚀 Server running on ${CONFIG.URL}:${CONFIG.PORT}`);
     });
   } catch (error) {
     console.error('🔴 Failed to start server:');
     process.exit(1);
   }
 };
+
+process.on('uncaughtException', (reason, promise) => {
+  console.error('Uncaught Exception: at:', promise, 'reason:', reason)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+})
+
 
 startServer();

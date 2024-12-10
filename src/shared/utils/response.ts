@@ -120,15 +120,19 @@ export const internalServer = (
 
 export const validationErrorResponse = (
   res: Response,
-  message = getMessage('VALIDATION_ERROR', 'DEFAULT'),
+  error:object,
+  message = "Validation failed",
   status_code = statusCode.UNPROCESSABLE_ENTITY
 ) => {
   const resData = {
     message,
+    error,
     statusCode: status_code,
   }
+  console.log('resData: ', resData);
   return res.status(status_code).json(resData)
 }
+
 export const tooManyRequests = (
   res: Response,
   languageCode = LANGUAGE_CODE.IT,

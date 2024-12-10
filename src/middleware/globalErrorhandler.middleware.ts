@@ -1,9 +1,9 @@
-import { NextFunction,Request,RequestHandler,Response, Express } from 'express'
+import { NextFunction,Request,RequestHandler,Response } from 'express'
 import fs from 'fs'
 
 import { Transaction } from 'sequelize'
 import dbConnection from '../database/data-source'
-import { CustomError, UploadedFiles } from '../types/types'
+import { CustomError } from '../types/types'
 // const { deleteLocalFile } = require('../helper/common')
 
 const errorLogStream = fs.createWriteStream('./logs/error.log', { flags: 'a' })

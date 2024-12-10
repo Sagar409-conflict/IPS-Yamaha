@@ -1,12 +1,13 @@
 import { Request, RequestHandler, Response } from "express"
 import userService from "../service"
-import { apiHandler, apiHandlerWithTransaction } from "../../../middleware/globalErrorhandler.middleware";
+import { apiHandler } from "../../../middleware/globalErrorhandler.middleware";
+import { sendSuccess } from "../../../middleware/apiHandler.middleware";
 
 class AuthController {
-  register: RequestHandler = apiHandlerWithTransaction(async (req:Request, res:Response) => {
-    const result = await userService.findOne(req.body);
-    res.status(200).json({ message: "User registered successfully", result });
-  });
+  register: RequestHandler = apiHandler(async (req:Request, res:Response) => {
+    const result = await userService.findOne(req.body)
+    sendSuccess({res,message:'Fetched successfully',data:result})
+  })
 }
 const authController = new AuthController()
 export default authController

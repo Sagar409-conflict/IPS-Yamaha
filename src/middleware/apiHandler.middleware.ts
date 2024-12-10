@@ -1,27 +1,35 @@
 import { statusCode } from "../shared/constant/statusCode"
 import { CustomError } from '../types/types'
-export const sendAPIerror = (statusCode: number, message: string, errors?: CustomError) => {
+import { Response } from 'express'
+
+export const sendAPIerror = (statusCode: number, message: string) => {
   const error: CustomError = new Error(message || 'Internal Server Error')
   error.statusCode = statusCode || 500
-  if (errors.length > 0) {
-    error.errors = errorFormatter(errors)
-  }
   throw error
 }
 
-
-const errorFormatter = (errors: [{path: number, msg: string}]) => {
-  const formattedErrors: Record<number, string> = {}
-  errors.forEach((error) => {
-    formattedErrors[error.path] = error.msg
-  })
-  return formattedErrors
+interface SuccessResponseOptions {
+  res: Response;
+  message?: string;
+  data?: unknown | null;
+  status?: number;
 }
 
-export const sendSuccess = ({ res , message, data = null }) => {
-  const response = { message: message || 'success' }
-  if (data) response.data = data
-  res.status(statusCode.SUCCESS).send(response)
-}
+export const sendSuccess = ({
+  res,
+  message = 'success',
+  data = null,
+  status = 200,
+}: SuccessResponseOptions): void => {
+  const response: Record<string, unknown> = {
+    message,
+  };
+
+  if (data !== null && data !== undefined) {
+    response.data = data;
+  }
+
+  res.status(status).json(response);
+};
 
 
